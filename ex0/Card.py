@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:02:55 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/03 15:36:23 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/03 16:09:56 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -24,6 +24,7 @@ class Rarity(Enum):
 class Card_Type(Enum):
     CREATURE = "Creature"
     SPELL = "Spell"
+    ARTIFACT = "Artifact"
 
 
 class Card (ABC):
