@@ -6,12 +6,13 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:02:55 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/03 16:09:56 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/04 14:22:58 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from abc import ABC, abstractmethod
 from enum import Enum
+from typing import Any
 
 
 class Rarity(Enum):
@@ -29,15 +30,20 @@ class Card_Type(Enum):
 
 class Card (ABC):
     def __init__(self, name: str, cost: int, rarity: str) -> None:
+        if not isinstance(name, str) or len(name.strip()) == 0:
+            raise ValueError("The card name is not valid")
+        if not isinstance(cost, int) or cost < 0:
+            raise ValueError("Cost must be a positive integer")
+
         self.name = name
         self.cost = cost
         self.rarity = rarity
 
     @abstractmethod
-    def play(self, game_state: dict) -> dict:
+    def play(self, game_state: dict[str, Any]) -> dict[str, Any]:
         pass
 
-    def get_card_info(self) -> dict:
+    def get_card_info(self) -> dict[str, Any]:
         return {
             "name": self.name,
             "cost": self.cost,

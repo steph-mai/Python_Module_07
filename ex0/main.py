@@ -6,17 +6,18 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 12:17:14 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/03 15:45:52 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/04 14:22:16 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
 from ex0.Card import Rarity
 from ex0.CreatureCard import CreatureCard
+from typing import Any
 
 if __name__ == "__main__":
     print("\n=== DataDeck Card Foundation ===\n")
 
-    game_state: dict = {
+    game_state: dict[str, Any] = {
         "available_mana": 6
     }
 
