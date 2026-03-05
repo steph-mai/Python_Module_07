@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 13:33:30 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/05 17:15:36 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/05 17:42:34 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -24,23 +24,28 @@ class AggressiveStrategy(GameStrategy):
         """
         Executes a game turn using an aggressive tactical approach.
 
-        This strategy prioritizes playing as many cards as possible by sorting
-        the hand by cost in ascending order. It calculates the total potential
-        damage based on the attack power of the Creature cards
-        played during the turn.
+        This strategy maximizes the number of actions
+        by playing cards in ascending order of cost
+        until the mana limit (10) is reached. It calculates the
+        total damage dealt by summing the attack power
+        of all creatures successfully played
+        and identifies the priority target from the battlefield.
         """
         sorted_hand: list[Card] = sorted(hand, key=lambda card: card.cost)
 
         cards_played: list[str] = []
         damage_dealt: int = 0
         mana_used: int = 0
+        mana_limit = 10
 
         for card in sorted_hand:
-            cards_played.append(card.name)
-            mana_used += card.cost
-
-            if hasattr(card, 'attack'):
-                damage_dealt += card.attack
+            if mana_used + card.cost <= mana_limit:
+                cards_played.append(card.name)
+                mana_used += card.cost
+                if hasattr(card, 'attack'):
+                    damage_dealt += card.attack
+            else:
+                break
 
         current_targets: list[Any] = battlefield
         prioritized = self.prioritize_targets(current_targets)

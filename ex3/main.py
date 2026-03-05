@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 15:18:16 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/05 17:28:09 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/05 17:39:05 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     print("\nSimulating aggressive turn...")
     turn_actions = engine.simulate_turn()
 
-    print("Turn execution:")
+    print("\nTurn execution:")
     print(f"Strategy: {strategy.get_strategy_name()}")
     print(f"Actions: {turn_actions}")
 
