@@ -87,17 +87,22 @@ class EliteCard(Card, Combatable, Magical):
     def cast_spell(
             self,
             spell_name: str,
-            targets: List[str]
+            targets: List[Any]
             ) -> Dict[str, Any]:
+
         mana_to_use = 0
+
         for spell in MagicSpells:
             if spell_name.lower() == spell.spell_name:
                 mana_to_use += spell.mana_to_use
                 break
+
         if mana_to_use == 0:
             raise AttributeError("This spell doesn't exist. "
                                  "Valid spells are 'heal', "
                                  "'shield' and 'fireball'")
+                                 
+        self.mana_pool -= mana_to_use
         return {
             "caster": self.name,
             "spell": spell_name,
