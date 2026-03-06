@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 15:18:16 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/05 17:39:05 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/06 15:12:13 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -22,22 +22,25 @@ if __name__ == "__main__":
     strategy = AggressiveStrategy()
 
     print("Configuring Fantasy Card Game...")
-    engine.configure_engine(factory, strategy)
+    try:
+        engine.configure_engine(factory, strategy)
 
-    status = engine.get_engine_status()
-    print(f"Factory: {type(factory).__name__}")
-    print(f"Strategy: {strategy.get_strategy_name()}")
-    print(f"Available types: {factory.get_supported_types()}")
+        status = engine.get_engine_status()
+        print(f"Factory: {type(factory).__name__}")
+        print(f"Strategy: {strategy.get_strategy_name()}")
+        print(f"Available types: {factory.get_supported_types()}")
 
-    print("\nSimulating aggressive turn...")
-    turn_actions = engine.simulate_turn()
+        print("\nSimulating aggressive turn...")
+        turn_actions = engine.simulate_turn()
 
-    print("\nTurn execution:")
-    print(f"Strategy: {strategy.get_strategy_name()}")
-    print(f"Actions: {turn_actions}")
+        print("\nTurn execution:")
+        print(f"Strategy: {strategy.get_strategy_name()}")
+        print(f"Actions: {turn_actions}")
 
-    print("\nGame Report:")
-    print(engine.get_engine_status())
+        print("\nGame Report:")
+        print(engine.get_engine_status())
+    except Exception as e:
+        print(e)
 
     print("\nAbstract Factory + Strategy Pattern: "
           "Maximum flexibility achieved!")
