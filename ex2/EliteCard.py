@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/04 14:46:23 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/05 17:08:30 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/06 16:28:48 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -67,10 +67,12 @@ class EliteCard(Card, Combatable, Magical):
             }
 
     def attack(self, target: Any) -> dict[str, Any]:
-        if self.combat_type.lower() not in [t.value for t in CombatTypes]:
+        valid_types = [t.value for t in CombatTypes]
+
+        if self.combat_type.lower() not in valid_types:
             raise AttributeError(
-                'Invalid combat type: '
-                'Valid types are "melee" and "hand-to-hand"'
+                f"Invalid combat type: "
+                f"Valid types are {', '.join(valid_types)}"
                 )
         return {
             "attacker": self.name,
@@ -102,24 +104,22 @@ class EliteCard(Card, Combatable, Magical):
             spell_name: str,
             targets: List[Any]
             ) -> Dict[str, Any]:
+        valid_spells = {s.spell_name: s.mana_to_use for s in MagicSpells}
+        name_lower = spell_name.lower()
 
-        mana_to_use = 0
+        if name_lower not in valid_spells:
+            raise AttributeError(
+                f"This spell '{spell_name}' doesn't exist. "
+                f"Valid spells are: {', '.join(valid_spells.keys())}"
+            )
 
-        for spell in MagicSpells:
-            if spell_name.lower() == spell.spell_name:
-                mana_to_use += spell.mana_to_use
-                break
-
-        if mana_to_use == 0:
-            raise AttributeError("This spell doesn't exist. "
-                                 "Valid spells are 'heal', "
-                                 "'shield' and 'fireball'")
+        mana_to_use = valid_spells[name_lower]
 
         self.mana_pool -= mana_to_use
         return {
             "caster": self.name,
             "spell": spell_name,
-            "targets": targets,
+            "targets": [str(t) for t in targets],
             "mana_used": mana_to_use
         }
 

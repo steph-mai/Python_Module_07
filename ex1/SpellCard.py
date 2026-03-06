@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/03 16:10:52 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/04 14:36:43 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/06 15:52:36 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -24,7 +24,7 @@ class SpellCard(Card):
                 '(Valid effects are : '
                 '"damage", "heal", "buff"and "debuff"'
                 )
-        self.effect_type = effect_type.lower()
+        self.effect_type = effect_type
 
     def get_card_info(self) -> dict[str, Any]:
         info: Dict[str, Any] = super().get_card_info()
