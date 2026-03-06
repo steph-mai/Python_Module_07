@@ -6,7 +6,7 @@
 #  By: stmaire <stmaire@student.42.fr>           +#+  +:+       +#+         #
 #                                              +#+#+#+#+#+   +#+            #
 #  Created: 2026/03/05 14:41:43 by stmaire         #+#    #+#               #
-#  Updated: 2026/03/05 17:25:10 by stmaire         ###   ########.fr        #
+#  Updated: 2026/03/06 15:24:49 by stmaire         ###   ########.fr        #
 #                                                                           #
 # ************************************************************************* #
 
@@ -28,6 +28,10 @@ class GameEngine:
             factory: CardFactory,
             strategy: GameStrategy
             ) -> None:
+
+        if factory is None or strategy is None:
+            raise ValueError("Factory and Strategy cannot be None")
+
         self.factory = factory
         self.strategy = strategy
 
